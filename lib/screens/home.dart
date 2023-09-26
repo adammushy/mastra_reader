@@ -62,7 +62,9 @@ class _HomeScreenState extends State<HomeScreen> {
       if (f.type == FileSystemEntityType.directory) {
         await dirContents(Directory(file.uri.toFilePath()));
       } else if (f.type == FileSystemEntityType.file &&
-          file.path.endsWith('.pdf')) {
+              file.path.endsWith('.pdf') ||
+          file.path.endsWith('.doc') ||
+          file.path.endsWith('.ppt')) {
         files.add(file);
         print(files);
       }
@@ -108,7 +110,6 @@ class _HomeScreenState extends State<HomeScreen> {
       appBar: AppBar(
         title: Text(pdfFiles.length.toString()),
       ),
-
       body: ListView.builder(
           itemCount: pdfFiles.length,
           itemBuilder: (BuildContext context, index) {
@@ -125,7 +126,6 @@ class _HomeScreenState extends State<HomeScreen> {
               trailing: Text(pdfFiles[index].statSync().size.toString()),
             );
           }),
-     
     );
   }
 }
